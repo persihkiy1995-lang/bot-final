@@ -309,7 +309,7 @@ async def process_all(msg, pairs_dict: Dict, is_otc: bool):
     await msg.edit_text(text)
 
 
-async def main():
+def main():
     threading.Thread(target=lambda: flask_app.run(host='0.0.0.0', port=PORT), daemon=True).start()
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
@@ -320,8 +320,8 @@ async def main():
     app.add_handler(CommandHandler("all", all_signals))
     app.add_handler(CommandHandler("allotc", all_otc))
     print("Bot running 24/7 on Render!")
-    await app.run_polling()
+    app.run_polling()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
